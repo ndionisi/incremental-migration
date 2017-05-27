@@ -4,17 +4,15 @@ public class PersonJdbc {
 
     private Long id;
     private final String lastName;
-    private final String phoneNumber;
     private final String country;
 
-    public PersonJdbc(String lastName, String phoneNumber, String country) {
+    public PersonJdbc(String lastName, String country) {
         this.lastName = lastName;
-        this.phoneNumber = phoneNumber;
         this.country = country;
     }
 
-    public PersonJdbc(long id, String lastName, String phoneNumber, String country) {
-        this(lastName, phoneNumber, country);
+    public PersonJdbc(long id, String lastName, String country) {
+        this(lastName, country);
         this.id = id;
     }
 
@@ -24,10 +22,6 @@ public class PersonJdbc {
 
     public String getLastName() {
         return lastName;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
     }
 
     public String getCountry() {

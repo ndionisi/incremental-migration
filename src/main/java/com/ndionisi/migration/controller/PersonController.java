@@ -35,13 +35,13 @@ public class PersonController {
 
     @PostMapping("/jpa")
     public PersonJpa createPersonJpa(@Valid @RequestBody PersonDto personDto) {
-        PersonJpa person = new PersonJpa(personDto.getLastName(), personDto.getPhoneNumber(), personDto.getCountry());
+        PersonJpa person = new PersonJpa(personDto.getLastName(), personDto.getCountry());
         return personJpaRepository.save(person);
     }
 
     @PostMapping("/jdbc")
     public PersonJdbc createPersonJdbc(@Valid @RequestBody PersonDto personDto) {
-        PersonJdbc person = new PersonJdbc(personDto.getLastName(), personDto.getPhoneNumber(), personDto.getCountry());
+        PersonJdbc person = new PersonJdbc(personDto.getLastName(), personDto.getCountry());
         return personJdbcRepository.save(person);
     }
 }
