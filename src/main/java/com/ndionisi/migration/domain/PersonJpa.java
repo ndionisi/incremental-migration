@@ -1,6 +1,5 @@
 package com.ndionisi.migration.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.Entity;
@@ -15,7 +14,6 @@ public class PersonJpa {
     @Id
     @GeneratedValue
     private Long id;
-    private String lastName;
     private String familyName;
     private String country;
 
@@ -35,23 +33,13 @@ public class PersonJpa {
         this.id = id;
     }
 
-    @JsonIgnore
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
     @JsonProperty("lastName")
     public String getFamilyName() {
-        return familyName != null ? familyName : lastName;
+        return familyName;
     }
 
     public void setFamilyName(String familyName) {
         this.familyName = familyName;
-        this.lastName = familyName;
     }
 
     public String getCountry() {
