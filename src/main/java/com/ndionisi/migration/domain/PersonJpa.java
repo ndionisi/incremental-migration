@@ -1,5 +1,8 @@
 package com.ndionisi.migration.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -9,20 +12,21 @@ import javax.persistence.Table;
 @Table(name = "person")
 public class PersonJpa {
 
+    @Id
+    @GeneratedValue
     private Long id;
     private String lastName;
+    private String familyName;
     private String country;
 
     public PersonJpa() {
     }
 
-    public PersonJpa(String lastName, String country) {
-        this.lastName = lastName;
+    public PersonJpa(String familyName, String country) {
+        setFamilyName(familyName);
         this.country = country;
     }
 
-    @Id
-    @GeneratedValue
     public Long getId() {
         return id;
     }
@@ -31,12 +35,23 @@ public class PersonJpa {
         this.id = id;
     }
 
+    @JsonIgnore
     public String getLastName() {
         return lastName;
     }
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    @JsonProperty("lastName")
+    public String getFamilyName() {
+        return familyName != null ? familyName : lastName;
+    }
+
+    public void setFamilyName(String familyName) {
+        this.familyName = familyName;
+        this.lastName = familyName;
     }
 
     public String getCountry() {

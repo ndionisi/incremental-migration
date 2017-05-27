@@ -22,18 +22,22 @@ public class PersonJdbcRepository {
 
     public Iterable<PersonJdbc> findAll() {
         return jdbcTemplate.query(
-                "SELECT id, last_name, country FROM person",
-                (rs, i) -> new PersonJdbc(rs.getLong("id"), rs.getString("last_name"), rs.getString("country"))
+                "SELECT id, last_name, family_name, country FROM person",
+                (rs, i) -> {
+                    String familyName = rs.getString("family_name");
+                    return new PersonJdbc(rs.getLong("id"), familyName != null ? familyName : rs.getString("last_name"), rs.getString("country"));
+                }
         );
     }
 
     public PersonJdbc save(PersonJdbc person) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(connection -> {
-            String query = "INSERT INTO person (last_name, country) VALUES (?, ?)";
+            String query = "INSERT INTO person (last_name, family_name, country) VALUES (?, ?, ?)";
             PreparedStatement ps = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, person.getLastName());
-            ps.setString(2, person.getCountry());
+            ps.setString(1, person.getFamilyName());
+            ps.setString(2, person.getFamilyName());
+            ps.setString(3, person.getCountry());
             return ps;
         }, keyHolder);
 

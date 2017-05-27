@@ -1,18 +1,20 @@
 package com.ndionisi.migration.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class PersonJdbc {
 
     private Long id;
-    private final String lastName;
+    private final String familyName;
     private final String country;
 
-    public PersonJdbc(String lastName, String country) {
-        this.lastName = lastName;
+    public PersonJdbc(String familyName, String country) {
+        this.familyName = familyName;
         this.country = country;
     }
 
-    public PersonJdbc(long id, String lastName, String country) {
-        this(lastName, country);
+    public PersonJdbc(long id, String familyName, String country) {
+        this(familyName, country);
         this.id = id;
     }
 
@@ -20,8 +22,9 @@ public class PersonJdbc {
         return id;
     }
 
-    public String getLastName() {
-        return lastName;
+    @JsonProperty("lastName")
+    public String getFamilyName() {
+        return familyName;
     }
 
     public String getCountry() {
