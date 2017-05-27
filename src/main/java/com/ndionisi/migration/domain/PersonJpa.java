@@ -12,13 +12,15 @@ public class PersonJpa {
     private Long id;
     private String lastName;
     private String phoneNumber;
+    private String country;
 
     public PersonJpa() {
     }
 
-    public PersonJpa(String lastName, String phoneNumber) {
+    public PersonJpa(String lastName, String phoneNumber, String country) {
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
+        this.country = country;
     }
 
     @Id
@@ -45,5 +47,13 @@ public class PersonJpa {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 }
